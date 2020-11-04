@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.run</groupId>
+	<artifactId>authz</artifactId>
+	<version>0.0.1</version>
+	<name>authz</name>
+	<description>权限中心</description>
+	<packaging>pom</packaging>
+	<url>http://devops.locman.cn</url>
+	<inceptionYear>2017</inceptionYear>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java_source_version>1.8</java_source_version>
+		<java_target_version>1.8</java_target_version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<mongo.host>120.76.154.201</mongo.host>
+		<mongo.port>27017</mongo.port>
+		<mongo.username>sefon</mongo.username>
+		<mongo.password>sefon123456</mongo.password>
+		<zkConnectingStr>zookeeper://127.0.0.1:2181</zkConnectingStr>
+		<!-- redis链接配置 -->
+		<redis.host>120.76.154.201</redis.host> 
+		<!--<redis.host>131.10.10.103</redis.host>-->
+		<redis.password>root</redis.password>
+		<redis.port>6379</redis.port>
+		<redis.maxIdle>300</redis.maxIdle>
+		<redis.maxActive>300</redis.maxActive>
+		<redis.maxWait>1000</redis.maxWait>
+		<redis.testOnBorrow>true</redis.testOnBorrow>
+		<!-- 30分钟超时 -->
+		<redis.timeout>1800000</redis.timeout>
+	</properties>
+	<!-- 镜像库 -->
+	<repositories>
+		<!-- 本地仓库 -->
+		<repository>
+			<id>local private</id>
+			<name>Local Maven Repository</name>
+			<url>http://193.168.0.9:8081/repository/maven-public/</url>
+			<layout>default</layout>
+		</repository>
+		<!-- 远程中央仓库 -->
+		<repository>
+			<id>spring-milestone</id>
+			<url>https://repo.spring.io/libs-release</url>
+		</repository>
+	</repositories>
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+		</dependency>
+
+		<!-- <dependency> <groupId>mysql</groupId> <artifactId>mysql-connector-java</artifactId> 
+			<version>5.1.35</version> </dependency> -->
+	</dependencies>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+				<version>3.5</version>
+			</dependency>
+
+
+
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-redis</artifactId>
+				<version>1.4.0.RELEASE</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework.data</groupId>
+				<artifactId>spring-data-redis</artifactId>
+				<version>1.7.10.RELEASE</version>
+			</dependency>
+			<dependency>
+				<groupId>redis.clients</groupId>
+				<artifactId>jedis</artifactId>
+				<version>2.6.2</version>
+			</dependency>
+
+		</dependencies>
+	</dependencyManagement>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<configuration>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<fork>true</fork>
+					<source>${java_source_version}</source>
+					<target>${java_target_version}</target>
+					<encoding>${file_encoding}</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<configuration>
+					<attach>true</attach>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>compile</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-deploy-plugin</artifactId>
+			</plugin>
+		</plugins>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+	</build>
+	<modules>
+		<module>authz-service-crud</module>
+		<module>authz-service-query</module>
+	</modules>
+</project>

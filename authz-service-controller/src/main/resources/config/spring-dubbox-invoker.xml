@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+    http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	
+	<!-- 调用dubbo提供的用户中心写入RPC服务 -->
+	<dubbo:reference interface="com.run.authz.base.query.AuthzBaseQueryService" id="authzqueryRpcService" check="false"/>
+	
+	<dubbo:reference interface="com.run.authz.api.base.crud.AuthzBaseCurdService" id="authzBaseCurdService" check="false"/>
+	
+	<!-- 用户角色rpc -->
+	<dubbo:reference interface="com.run.authz.base.query.UserRoleBaseQueryService" id="userRoleBaseQueryService" check="false"/>
+	
+	<dubbo:reference interface="com.run.authz.api.base.crud.UserRoleBaseCrudService" id="userRoleBaseCrudService" check="false"/>
+	
+
+	<!-- 权限rpc -->
+	<dubbo:reference interface="com.run.authz.api.base.crud.PermissionBaseCrudService" id="permiBaseCrudService" check="false"/>
+	<dubbo:reference interface="com.run.authz.base.query.PermiBaseQueryService" id="permiBasequeryService" check="false"/>
+
+	<!-- 功能项rpc -->
+	<dubbo:reference interface="com.run.authz.api.base.crud.FunctionItemBaseCurdService" id="functionItemBaseCurdService" check="false"/>
+	
+	<dubbo:reference interface="com.run.authz.base.query.FunctionItemBaseQueryService" id="functionItemBaseQueryService" check="false"/>
+	
+	<!-- 黑白名单查询rpc -->
+	<dubbo:reference interface="com.run.authz.base.query.WhiteBlackBaseQueryService" id="whiteBlackBaseQueryService" check="false"/>
+	
+	<!-- 黑白名单curd Rpc -->
+	<dubbo:reference interface="com.run.authz.api.base.crud.WhiBlaCrudRpcService" id="whileBlacCrud" check="false" retries="0"/>
+
+	
+</beans>
